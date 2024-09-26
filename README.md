@@ -71,7 +71,6 @@ endmodule
 
 ![image](https://github.com/user-attachments/assets/3dc8f147-6e3a-4f46-8532-0c1e82a26ea6)
 
-
 4:1 MUX Behavioral Implementation
 
 module behavior(A,B,C,D,S1,S0,Y);
