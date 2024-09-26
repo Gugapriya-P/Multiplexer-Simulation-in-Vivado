@@ -69,6 +69,9 @@ output y;
 assign y = (~s1 & ~s0 & a) | (~s1 & s0 & b) | (s1 & ~s0 & c) | (s1 & s0 & d);
 endmodule
 
+![image](https://github.com/user-attachments/assets/3dc8f147-6e3a-4f46-8532-0c1e82a26ea6)
+
+
 4:1 MUX Behavioral Implementation
 
 module behavior(A,B,C,D,S1,S0,Y);
@@ -83,6 +86,32 @@ case ({S1, S0})
 2'b11: Y = D; 
 endcase
 end
+endmodule
+
+![image](https://github.com/user-attachments/assets/3836029e-269c-4966-b363-c304e9e6196e)
+
+4:1 MUX Structural Implementation
+
+module mux_4to1 (a,b,c,d,S0,S1,Y);
+input a,b,c,d;
+input  S0, S1;       
+output  Y ;          
+assign Y = (S1 == 0 && S0 == 0) ? a :(S1 == 0 && S0 == 1) ? b :(S1 == 1 && S0 == 0) ? c :(S1 == 1 && S0 == 1) ? d:
+endmodule
+
+![structural](https://github.com/user-attachments/assets/caf162c0-de19-4579-8ccc-7d507ffab2fa)
+
+4:1 MUX gate level Implementation
+
+module multiplexer(s1,s0,a,b,c,d,y);
+input s1,s0,a,b,c,d;
+output y;
+wire[3:0]w;
+and g1(w[0],~s1,~s0,a);
+and g2(w[1],~s1,s0,b);
+and g3(w[2],s1,~s0,c);
+and g4(w[3],s1,s0,d);
+or g5(y,w[0],w[1],w[2],w[3]);
 endmodule
 
 Conclusion:
