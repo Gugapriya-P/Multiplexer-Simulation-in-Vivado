@@ -114,6 +114,42 @@ or g5(y,w[0],w[1],w[2],w[3]);
 endmodule
 
 ![gate level](https://github.com/user-attachments/assets/6236beca-af8d-44f2-b053-ddd968996892)
+TESTBENCH:
+`timescale 1ns / 1ps
+
+module multiplexer_tb;
+  // Declare inputs as reg and outputs as wire
+  reg s1, s0, a, b, c, d;
+  wire y;
+
+  // Instantiate the multiplexer module
+  multiplexer uut (
+    .s1(s1), 
+    .s0(s0), 
+    .a(a), 
+    .b(b), 
+    .c(c), 
+    .d(d), 
+    .y(y)
+  );
+
+  // Test cases
+  initial begin
+    // Monitor changes in inputs and output
+    $monitor("s1 = %b, s0 = %b, a = %b, b = %b, c = %b, d = %b, y = %b", s1, s0, a, b, c, d, y);
+    
+    // Apply test vectors
+    s1 = 0; s0 = 0; a = 1; b = 0; c = 0; d = 0; #10;  // Test case 1
+    s1 = 0; s0 = 1; a = 0; b = 1; c = 0; d = 0; #10;  // Test case 2
+    s1 = 1; s0 = 0; a = 0; b = 0; c = 1; d = 0; #10;  // Test case 3
+    s1 = 1; s0 = 1; a = 0; b = 0; c = 0; d = 1; #10;  // Test case 4
+    
+    // Finish simulation
+    $finish;
+  end
+endmodule
+OUYPUT:![Uploading 4_MUX_TESTBENCH.jpg…]()
+
 
 Conclusion:
 
