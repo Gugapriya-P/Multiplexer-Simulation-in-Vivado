@@ -73,17 +73,19 @@ endmodule
 
 4:1 MUX Behavioral Implementation
 
-module behavior(A,B,C,D,S1,S0,Y);
-input A,B,C,D,S1,S0;
-output reg Y;
-always @(*) 
-begin 
-case ({S1, S0}) 
-2'b00: Y = A; 
-2'b01: Y = B; 
-2'b10: Y = C; 
-2'b11: Y = D; 
-endcase
+module mux(s, i, y);
+input [1:0] s;
+input [3:0] i;
+output reg y;  
+always @(s or i)  
+begin
+ case (s)
+        2'b00: y = i[0];  
+        2'b01: y = i[1];   
+        2'b10: y = i[2];
+        2'b11: y = i[3];  
+        default: y = 1'b0;
+    endcase
 end
 endmodule
 
